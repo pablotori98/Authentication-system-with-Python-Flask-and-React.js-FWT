@@ -35,24 +35,34 @@ def login_route():
     password = request.json.get("password", None)
     user= User.query.filter_by(email=email, password=password).first()
     
-    if user is None:
-        return jsonify({"msg":"Ta quivocao"})
+    if user:
+        access_token=create_access_token(identity=user.id)#Creación del token
+        return jsonify({"token": access_token, "user_id": user.id}), 200
+
     
 
-    #Creación del token
-    access_token=create_access_token(identity=email) 
-    print(access_token)
-    return jsonify({"token": access_token, "user_id": user.id}), 200
+@api.route('/signup', methods=['POST'])
+def signup_route():
+    user = request.json.get("user", None)
+    # resto de elementos del registro
 
-@api.route('/private', methods=['GET'])
+    user_exist = User.query.filter_by(user=user).filter_by(email=email).first()
+    if user_exist:
+        return jsonify({"msg":"User or mail exists"})
+    
+    else:
+        new_user = User(user=user)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"user":new_user.serialize()})
+
+
+@api.route('/private', methods=['POST'])
 @jwt_required
 def get_private():
-    current_user=get_jwt_identity()
-    response_bodyy= {
-        "msg":"Estas dentro del private"}
-
-    return jsonify(logged_in_as=current_user), 200
-
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    return jsonify(user.serialize()), 200
 
 # @api.route('/signup', methods=['POST'])
 # def get_signup():

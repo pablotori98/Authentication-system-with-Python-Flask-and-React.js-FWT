@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
 			message: null,
 			demo: [
 				{
@@ -20,32 +21,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			signup: () =>{
-				
-			},
+			// login: (email, password)=>{
+			// 		const opts = {
+			// 		method: "POST",
+			// 		headers: {
+			// 			"Content-Type":"application/json"
+			// 		},
+			// 		body: JSON.stringify({
+			// 			email: email,
+			// 			password: password
+			// 		})
+			// 	};
+			
+			// 		fetch("https://3001-4geeksacade-reactflaskh-x9zocgij5rf.ws-eu77.gitpod.io/api/login", opts)
+			// 		.then(resp=>{
+			// 			if(resp.status===200) return resp.json();
+			// 			else alert("There has been some error")
+			// 		})
+			// 		.then(data => sessionStorage.setItem("token", data.token))
+			// 		.catch(error =>{
+			// 			console.log("There was an error")
+			// 		})
+			// 	console.log("funciono")
+			// },
 
-			login: (email, password)=>{
-					const opts = {
+			login: async (email, password) =>{
+				const store = getStore();
+				const resp = await fetch(process.env.BACKEND_URL+"/api/login", {
 					method: "POST",
-					headers: {
-						"Content-Type":"application/json"
-					},
+					headers: {"Content-Type":"aplicattion/json"},
 					body: JSON.stringify({
 						email: email,
 						password: password
-					})
-				};
-			
-					fetch("https://3001-4geeksacade-reactflaskh-x9zocgij5rf.ws-eu77.gitpod.io/api/login", opts)
-					.then(resp=>{
-						if(resp.status===200) return resp.json();
-						else alert("There has been some error")
-					})
-					.then(data => sessionStorage.setItem("token", data.token))
-					.catch(error =>{
-						console.log("There was an error")
-					})
-				console.log("funciono")
+					}),
+				});
+				if(!resp.ok) throw Error("Problema en el login")
+				if(resp.status ===401){
+					throw "Credenciales no validas"
+				}
+				else if(resp.status ===400){
+					throw "Formato usuario o contraseña no valido"
+				}
+				const data = await resp.json();
+				localStorage.setItem("token", data.token);
+				setStore({token : data.token})
+				return true
 			},
 
 			getMessage: async () => {
