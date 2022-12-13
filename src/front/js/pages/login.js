@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 
 
 export const Login = () => {	
-	const navigate = useNavigate()
+	const Navigate = useNavigate()
 	const {store, actions} = useContext(Context)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -37,13 +37,13 @@ export const Login = () => {
 	}
 	useEffect(() => {
 		console.log("console log fuera de if")
-		// if (
-		//   sessionStorage.getItem("token") !== null &&
-		//   sessionStorage.getItem("token") !== undefined
-		// ) {
-		//   console.log("console log dentro de if")
-		//   Navigate("/");
-		// }
+		if (
+		  sessionStorage.getItem("token") !== null &&
+		  sessionStorage.getItem("token") !== undefined
+		) {
+		  console.log("console log dentro de if")
+		  Navigate("/");
+		}
 	  }, [token]);
 
 
