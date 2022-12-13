@@ -56,7 +56,7 @@ export const Login = () => {
 			<div className="login">
 				<div className="mb-2"><input className="w-50" value={email} type="text" placeholder="Usuario"  onChange={(event)=> setEmail(event.target.value)}/></div>
 				<div><input className="w-50" type="password" value={password} placeholder="Password" onChange={(event)=> setPassword(event.target.value)} /></div>
-				<button className="btn btn-secondary" onClick={handleClick}> Login</button>
+				<button type="submit" className="btn btn-secondary" onClick={handleClick}> Login</button>
 				<p>{email}</p>
 				<p>{password}</p>
 						

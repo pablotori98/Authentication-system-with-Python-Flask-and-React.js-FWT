@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if(resp.status===200) return resp.json();
 						else alert("There has been some error")
 					})
-					.then(data => sessionStorage.setItem("token", data.access_token))
+					.then(data => sessionStorage.setItem("token", data.token))
 					.catch(error =>{
 						console.log("There was an error")
 					})
