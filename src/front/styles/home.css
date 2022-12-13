@@ -1,0 +1,19 @@
+body{
+    background-image: url("https://wallpaperaccess.com/full/2825810.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.h1home{
+    font-size: 8rem;
+}
+
+.phome{
+    font-size: 2rem;
+}
+
+.h100{
+    min-height: 100vh;
+}

@@ -4,24 +4,21 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		<div className="text-center d-flex justify-content-evenly align-items-center h100">
+			<div className="w-50">
+			<h1 className="h1home">Do you want pizza?</h1>
+			<p className="phome">Sign in or sign up for free pizza</p>
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+
+			<div className="mt-5 w-50">
+				<img src="https://images.vexels.com/media/users/3/263340/isolated/preview/92d75abef1c7523630339a2793eba5eb-rebanada-de-trazo-de-color-de-pizza.png"/>
+			</div>
+
 		</div>
 	);
 };

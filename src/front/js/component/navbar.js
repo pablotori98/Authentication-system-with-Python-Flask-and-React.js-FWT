@@ -8,12 +8,13 @@ export const Navbar = () => {
 		return sessionStorage.removeItem("token")
 	}
 
+	
 
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar navbar-light bg-dark">
 			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+				<Link className="text-decoration-none" to="/">
+					<h2 className="navbar-brand mb-0 h1 text-white">Free Pizza</h2>
 				</Link>
 				<div className="ml-auto">
 
@@ -21,9 +22,13 @@ export const Navbar = () => {
 					<Link to="/">
 						<button className="btn btn-primary" onClick={removeToken} >Logout</button>
 					</Link>: 
+					<div>
 					<Link to="/login">
 					<button className="btn btn-primary">Login</button>
-					</Link>}
+					</Link>
+					<Link to="/signup"><button className="btn btn-primary ms-2">Sign Up</button></Link>
+					</div>
+					}
 				</div>
 			</div>
 		</nav>

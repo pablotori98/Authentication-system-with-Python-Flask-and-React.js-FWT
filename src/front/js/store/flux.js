@@ -20,6 +20,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+			signup: () =>{
+				
+			},
 
 			login: (email, password)=>{
 					const opts = {
